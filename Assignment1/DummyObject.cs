@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,16 @@ namespace Assignment1
 {
     public class DummyObject
     {
-        public static Dummy getObject()
+        public static Dummy getObject(int option)
+        {
+            return option switch
+            {
+                1 => getTestObject1(),
+                2 => getTestObject2(),
+                _ => throw new ArgumentException("Invalid argument")
+            };
+        }
+        private static Course getTestObject1()
         {
             var presentAddress = new Address()
             {
@@ -62,10 +72,28 @@ namespace Assignment1
             };
             return course;
         }
+        private static TestObject getTestObject2()
+        {
+            TestChildObject nestedObject = new();
+            nestedObject.stringType = "property1";
+            nestedObject.intType = 10;
+            nestedObject.objectType = new() { name = "plane" };
+
+            TestObject testObject = new TestObject();
+            testObject.stringType = "Strign1";
+            testObject.stringType1 = "Strign2";
+            testObject.intType = 10;
+            testObject.doubleType = 20.10;
+            testObject.longType = 1111110;
+            testObject.objectType = nestedObject;
+
+            return testObject;
+        }
     }
 
     public interface Dummy { }
 
+    #region testobject-1
     public class Course : Dummy
     {
         public string? Title { get; set; }
@@ -117,4 +145,41 @@ namespace Assignment1
         public string? Extension { get; set; }
         public string? CountryCode { get; set; }
     }
+    #endregion
+
+    #region testobject-2
+    public class TestObject : Dummy
+    {
+        public string? stringType;
+        public string? stringType1;
+        public int intType;
+        public double doubleType;
+        public long longType;
+        public TestChildObject? objectType;
+        public DateTime dateType = DateTime.Now;
+        public TestChildObject? objectPropertyType { get; set; }
+        public IList<string>? listType = new List<string>() { "sft", "maruf", null };
+        public IDictionary<string, int> dictionaryType = new Dictionary<string, int>() { { "sft", 1 }, { "Maruf", 20 } };
+        public void TestMethod()
+        {
+            Console.WriteLine("This is a test method");
+        }
+    }
+
+    public class TestChildObject
+    {
+        public string? stringType;
+        public int intType;
+        public ArrayList arrayListType = new ArrayList() { "car", "Robot", 1 };
+        public string[] stringArray = new string[] { "1", "2", "3" };
+        public Toy[] objectTypesArray = new Toy[] { new Toy() { name = "car" }, new Toy() { name = "robot" } };
+        public Toy? objectType;
+    }
+
+    public class Toy
+    {
+        public string? name;
+        public int price = 10;
+    }
+    #endregion
 }
