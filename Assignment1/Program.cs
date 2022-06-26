@@ -7,12 +7,12 @@ tObject2.age = 10;
 tObject2.toy = new Toy() { name = "plane" };
 
 TestObject tObject = new TestObject();
-tObject.property1 = "Shafayet";
-tObject.property2 = "Maruf";
-tObject.property3 = 10;
-tObject.property4 = 20.10;
-tObject.property5 = 1111110;
-tObject.t = tObject2;
+//tObject.property1 = "Shafayet";
+//tObject.property2 = "Maruf";
+//tObject.property3 = 10;
+//tObject.property4 = 20.10;
+//tObject.property5 = 1111110;
+//tObject.t = tObject2;
 
-string? json = JsonFormatter.Convert(tObject);
+string? json = JsonFormatter.Convert(DummyObject.getObject());
 Console.WriteLine(json);
