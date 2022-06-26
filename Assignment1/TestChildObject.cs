@@ -14,5 +14,6 @@ namespace Assignment1
         public ArrayList toys = new ArrayList() { "car", "Robot", 1 };
         public string[] numbers = new string[] { "1", "2", "3" };
         public Toy[] ttoys = new Toy[] { new Toy() { name = "car"}, new Toy() { name = "robot" } };
+        public Toy toy;
     }
 }
