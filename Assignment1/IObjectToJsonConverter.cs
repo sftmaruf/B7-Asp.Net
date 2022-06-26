@@ -8,7 +8,8 @@ namespace Assignment1
 {
     public  interface IObjectToJsonConverter
     {
-        public string ConvertToJson(object obj);
+        public void Convert(object? obj);
+        public string? GetJson();
         public void Print();
     }
 }

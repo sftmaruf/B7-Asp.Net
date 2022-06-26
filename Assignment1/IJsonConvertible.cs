@@ -8,6 +8,6 @@ namespace Assignment1
 {
     public interface IJsonConvertible
     {
-        public void ConvertToJson(object obj, ref StringBuilder _tempString, ref bool isObjectInsideArray, ref string? objectName);
+        public void ConvertToJson(object obj, ref StringBuilder _json);
     }
 }
