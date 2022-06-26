@@ -9,8 +9,8 @@ namespace Assignment1
 {
     public class Property : IJsonConvertible
     {
-        private IObjectToJsonConverter _converter;
-        private IEnumerableType _enumerableType;
+        private readonly IObjectToJsonConverter _converter;
+        private readonly IEnumerableType _enumerableType;
         private bool isObject(PropertyInfo property) => !Type.IsJsonableType(property);
 
         public Property(IObjectToJsonConverter converter, IEnumerableType enumerableType)
@@ -19,7 +19,7 @@ namespace Assignment1
             _enumerableType = enumerableType;
         }
 
-        public void ConvertToJson(object obj, ref StringBuilder _tempString, ref bool isObjectInsideArray, ref string? objectName)
+        public void ConvertToJson(object obj, ref StringBuilder _json)
         {
             PropertyInfo[] properties = obj.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
@@ -29,34 +29,46 @@ namespace Assignment1
                 {
                     if (!(property.GetIndexParameters().Length > 0))
                     {
-                        _tempString.Append(BuildJsonString(property, obj, isObjectInsideArray));
+                        _json.Append(BuildJsonString(property, obj));
                     }
                 }
-
-                if (Type.isEnumerableType(property))
+                else if (Type.isEnumerableType(property))
                 {
-                    _enumerableType.ConvertToJson(property, obj, ref _tempString, ref isObjectInsideArray);
+                    _enumerableType.ConvertToJson(property, obj, ref _json);
                     continue;
                 }
-
-                if (isObject(property))
+                else if (isObject(property))
                 {
-                    string title = StringFormatter.WrapByQuotation(property.Name);
-                    _tempString.Append(title).Append(": ").Append("{\n");
-                    _converter.Convert(property.GetValue(obj));
-                    _tempString.Append("},\n");
+                    string key = StringFormatter.WrapByQuotation(property.Name);
+                    var value = property.GetValue(obj);
+
+                    AppendValueToJsonObject(ref _json, key, value);
                 }
             }
         }
 
-        private string BuildJsonString(PropertyInfo property, object? obj, bool isObjectInsideArray)
+        private void AppendValueToJsonObject(ref StringBuilder _json, string key, object? value)
+        {
+            _json.Append(key).Append(": ");
+            if (value == null)
+            {
+                _json?.Append("null").Append('\n');
+            }
+            else
+            {
+                _json.Append('{').Append('\n');
+                _converter.Convert(value);
+                _json.Append('}').Append(',').Append('\n');
+            }
+        }
+
+        private string BuildJsonString(PropertyInfo property, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
             string? value = property.PropertyType == typeof(string) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
-            string title = StringFormatter.WrapByQuotation(property.Name);
+            string jsonKey = StringFormatter.WrapByQuotation(property.Name);
 
-            stringBuilder.Append(title).Append(": ").Append(value).Append(", ");
-            if (!isObjectInsideArray) stringBuilder.Append('\n');
+            stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');
             return stringBuilder.ToString();
         }
     }
