@@ -62,7 +62,7 @@ namespace Assignment1
         private string BuildJsonString(FieldInfo field, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            string? value = field.FieldType == typeof(string) || field.FieldType == typeof(DateTime) ? StringFormatter.WrapByQuotation(field.GetValue(obj)?.ToString())  : field.GetValue(obj)?.ToString();
+            string? value = Type.isQuotableType(field) ? StringFormatter.WrapByQuotation(field.GetValue(obj)?.ToString())  : field.GetValue(obj)?.ToString();
             string jsonKey = StringFormatter.WrapByQuotation(field.Name);
 
             stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');

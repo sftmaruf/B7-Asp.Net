@@ -65,7 +65,7 @@ namespace Assignment1
         private string BuildJsonString(PropertyInfo property, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            string? value = property.PropertyType == typeof(string) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
+            string? value = Type.isQuotableType(property) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
             string jsonKey = StringFormatter.WrapByQuotation(property.Name);
 
             stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');

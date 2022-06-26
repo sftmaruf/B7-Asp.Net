@@ -63,5 +63,9 @@ namespace Assignment1
             return property.PropertyType.IsValueType
                 || property.PropertyType.Name == "String";
         }
+
+        public static bool isQuotableType(FieldInfo field) => field.FieldType == typeof(string) || field.FieldType == typeof(DateTime);
+
+        public static bool isQuotableType(PropertyInfo property) => property.PropertyType == typeof(string) || property.PropertyType == typeof(DateTime);
     }
 }
