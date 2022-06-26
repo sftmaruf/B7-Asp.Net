@@ -123,7 +123,7 @@ namespace Assignment1
             if (character == '}') isClosedBracket = true;
             if (isClosedBracket)
             {
-                if (character != '\n' && character != '}' && character != ' ') isClosedBracket = false;
+                if (character != '\n' && character != '}' && character != ' ' && character != ']') isClosedBracket = false;
                 if (character == '\n')
                 {
                     return true;
