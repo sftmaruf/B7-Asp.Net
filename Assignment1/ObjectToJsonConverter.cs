@@ -1,44 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 
 namespace Assignment1
 {
     public class ObjectToJsonConverter : IObjectToJsonConverter
     {
-        private StringBuilder _json = new StringBuilder();
-        private object _object;
-
-        public string ConvertToJson(object obj)
+        private ICodeIndentor _indentor;
+        private StringBuilder _json;
+        private IJsonConvertible _field;
+        private IJsonConvertible _property;
+        
+        public ObjectToJsonConverter(ICodeIndentor indentMechanism)
         {
-            if (obj == null) throw new ArgumentException("Object needs to be instantiated");
-            _object = obj;
-
-            Type type = _object.GetType();
-
-            handleFields(type);
-            return "";
+            _indentor = indentMechanism;
+            _json = new StringBuilder().Append('{').Append('\n');
+            _field = new Field(this, new EnumerableType(this));
+            _property = new Property(this, new EnumerableType(this));
         }
 
-        private void handleFields(Type type)
+        public void Convert(object? obj)
         {
-            FieldInfo[] fields = type.GetFields();
-
-            foreach (var field in fields)
+            if (obj != null)
             {
-                if (field.FieldType.IsValueType)
-                {
-                    _json.Append(field.Name).Append(": ").Append(field.GetValue(_object)).Append("\n");
-                }
+                _field.ConvertToJson(obj, ref _json);
+                _property.ConvertToJson(obj, ref _json);
             }
+        }
+
+        private void IndentJson()
+        {
+             _json.Append('}');
+            _json = _indentor.Indent(_json);
+        }
+
+        public string? GetJson()
+        {
+            IndentJson();
+            return _json?.ToString();
         }
 
         public void Print()
         {
-            Console.WriteLine(_json.ToString());
+            Console.WriteLine(GetJson());
         }
     }
 }
