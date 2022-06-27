@@ -7,7 +7,7 @@ namespace Assignment1
     {
         private readonly IObjectToJsonConverter _converter;
         private readonly IEnumerableType _enumerableType;
-        private bool isObject(PropertyInfo property) => !Type.IsJsonableType(property);
+        private bool isObject(PropertyInfo property) => !TypeChecker.IsJsonableType(property);
 
         public Property(IObjectToJsonConverter converter, IEnumerableType enumerableType)
         {
@@ -21,14 +21,14 @@ namespace Assignment1
 
             foreach (var property in properties)
             {
-                if (Type.IsJsonableType(property))
+                if (TypeChecker.IsJsonableType(property))
                 {
                     if (!(property.GetIndexParameters().Length > 0))
                     {
                         _json.Append(BuildJsonString(property, obj));
                     }
                 }
-                else if (Type.isEnumerableType(property))
+                else if (TypeChecker.isEnumerableType(property))
                 {
                     _enumerableType.ConvertToJson(property, obj, ref _json);
                     continue;
@@ -61,7 +61,7 @@ namespace Assignment1
         private string BuildJsonString(PropertyInfo property, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            string? value = Type.isQuotableType(property) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
+            string? value = TypeChecker.isQuotableType(property) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
             string jsonKey = StringFormatter.WrapByQuotation(property.Name);
 
             stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');

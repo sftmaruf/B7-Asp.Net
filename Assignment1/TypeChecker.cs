@@ -2,13 +2,13 @@
 
 namespace Assignment1
 {
-    public static class Type 
+    public static class TypeChecker 
     {
         public static bool isDictionaryType(FieldInfo field)
         {
             if(isEnumerableType(field))
             {
-                System.Type? enumerableType = field.FieldType.GetInterface("IEnumerable`1");
+                Type? enumerableType = field.FieldType.GetInterface("IEnumerable`1");
                 if (enumerableType is null) return false;
                 return enumerableType.GetGenericArguments().Any(t => t.Name == "KeyValuePair`2");
             }

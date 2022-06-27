@@ -7,7 +7,7 @@ namespace Assignment1
     {
         private readonly IObjectToJsonConverter _converter;
         private readonly IEnumerableType _enumerableType;
-        private static bool IsObject(FieldInfo field) => !Type.IsJsonableType(field);
+        private static bool IsObject(FieldInfo field) => !TypeChecker.IsJsonableType(field);
 
         public Field(IObjectToJsonConverter converter, IEnumerableType enumerableType)
         {
@@ -21,11 +21,11 @@ namespace Assignment1
 
             foreach (var field in fields)
             {
-                if (Type.IsJsonableType(field))
+                if (TypeChecker.IsJsonableType(field))
                 {
                     _json.Append(BuildJsonString(field, obj));
                 }
-                else if (Type.isEnumerableType(field))
+                else if (TypeChecker.isEnumerableType(field))
                 {
                     _enumerableType.ConvertToJson(field, obj, ref _json);
                     continue;
@@ -58,7 +58,7 @@ namespace Assignment1
         private string BuildJsonString(FieldInfo field, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            string? value = Type.isQuotableType(field) ? StringFormatter.WrapByQuotation(field.GetValue(obj)?.ToString())  : field.GetValue(obj)?.ToString();
+            string? value = TypeChecker.isQuotableType(field) ? StringFormatter.WrapByQuotation(field.GetValue(obj)?.ToString())  : field.GetValue(obj)?.ToString();
             string jsonKey = StringFormatter.WrapByQuotation(field.Name);
 
             stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');
