@@ -9,12 +9,12 @@ namespace Assignment1
         private IJsonConvertible _field;
         private IJsonConvertible _property;
         
-        public ObjectToJsonConverter(ICodeIndentor indentMechanism)
+        public ObjectToJsonConverter(ICodeIndentor indentMechanism, ITypeChecker typeChecker)
         {
             _indentor = indentMechanism;
             _json = new StringBuilder().Append('{').Append('\n');
-            _field = new Field(this, new EnumerableType(this));
-            _property = new Property(this, new EnumerableType(this));
+            _field = new Field(this, new EnumerableType(this, typeChecker), typeChecker);
+            _property = new Property(this, new EnumerableType(this, typeChecker), typeChecker);
         }
 
         public void Convert(object? obj)

@@ -7,12 +7,14 @@ namespace Assignment1
     {
         private readonly IObjectToJsonConverter _converter;
         private readonly IEnumerableType _enumerableType;
-        private bool isObject(PropertyInfo property) => !TypeChecker.IsJsonableType(property);
+        private readonly ITypeChecker _typeChecker;
+        private bool isObject(PropertyInfo property) => !_typeChecker.IsJsonableType(property);
 
-        public Property(IObjectToJsonConverter converter, IEnumerableType enumerableType)
+        public Property(IObjectToJsonConverter converter, IEnumerableType enumerableType, ITypeChecker typeChecker)
         {
             _converter = converter; 
             _enumerableType = enumerableType;
+            _typeChecker = typeChecker;
         }
 
         public void ConvertToJson(object obj, ref StringBuilder _json)
@@ -21,14 +23,14 @@ namespace Assignment1
 
             foreach (var property in properties)
             {
-                if (TypeChecker.IsJsonableType(property))
+                if (_typeChecker.IsJsonableType(property))
                 {
                     if (!(property.GetIndexParameters().Length > 0))
                     {
                         _json.Append(BuildJsonString(property, obj));
                     }
                 }
-                else if (TypeChecker.isEnumerableType(property))
+                else if (_typeChecker.isEnumerableType(property))
                 {
                     _enumerableType.ConvertToJson(property, obj, ref _json);
                     continue;
@@ -61,7 +63,7 @@ namespace Assignment1
         private string BuildJsonString(PropertyInfo property, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            string? value = TypeChecker.isQuotableType(property) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
+            string? value = _typeChecker.isQuotableType(property) ? StringFormatter.WrapByQuotation(property.GetValue(obj)?.ToString()) : property.GetValue(obj)?.ToString();
             string jsonKey = StringFormatter.WrapByQuotation(property.Name);
 
             stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');

@@ -6,19 +6,22 @@ namespace Assignment1
     public class EnumerableType : IEnumerableType
     {
         private readonly IObjectToJsonConverter _converter;
-        private static bool IsObject(TypeInfo type) => !TypeChecker.IsJsonableType(type);
-        private static bool IsString(dynamic value) => value.GetType() == typeof(string);
+        private readonly ITypeChecker _typeChecker;
 
-        public EnumerableType(IObjectToJsonConverter _converter)
+        private bool IsObject(TypeInfo type) => !_typeChecker.IsJsonableType(type);
+        private bool IsString(dynamic value) => value.GetType() == typeof(string);
+
+        public EnumerableType(IObjectToJsonConverter _converter, ITypeChecker typeChecker)
         {
             this._converter = _converter;
+            _typeChecker = typeChecker;
         }
 
         public void ConvertToJson(FieldInfo field, object? obj, ref StringBuilder _json)
         {
             dynamic? values = field.GetValue(obj);
            
-            if (TypeChecker.isDictionaryType(field))
+            if (_typeChecker.isDictionaryType(field))
             {
                 ConvertDictionaryTypetoJson(values, field.Name, ref _json);
             }
@@ -32,7 +35,7 @@ namespace Assignment1
         {
             dynamic? values = property.GetValue(obj);
 
-            if (TypeChecker.isDictionaryType(property))
+            if (_typeChecker.isDictionaryType(property))
             {
                 ConvertDictionaryTypetoJson(values, property.Name, ref _json);
             }

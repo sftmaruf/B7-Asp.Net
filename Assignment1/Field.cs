@@ -7,12 +7,14 @@ namespace Assignment1
     {
         private readonly IObjectToJsonConverter _converter;
         private readonly IEnumerableType _enumerableType;
-        private static bool IsObject(FieldInfo field) => !TypeChecker.IsJsonableType(field);
+        private readonly ITypeChecker _typeChecker;
+        private bool IsObject(FieldInfo field) => !_typeChecker.IsJsonableType(field);
 
-        public Field(IObjectToJsonConverter converter, IEnumerableType enumerableType)
+        public Field(IObjectToJsonConverter converter, IEnumerableType enumerableType, ITypeChecker typeChecker)
         {
             _converter = converter;
             _enumerableType = enumerableType;
+            _typeChecker = typeChecker;
         }
 
         public void ConvertToJson(object obj, ref StringBuilder _json)
@@ -21,11 +23,11 @@ namespace Assignment1
 
             foreach (var field in fields)
             {
-                if (TypeChecker.IsJsonableType(field))
+                if (_typeChecker.IsJsonableType(field))
                 {
                     _json.Append(BuildJsonString(field, obj));
                 }
-                else if (TypeChecker.isEnumerableType(field))
+                else if (_typeChecker.isEnumerableType(field))
                 {
                     _enumerableType.ConvertToJson(field, obj, ref _json);
                     continue;
@@ -58,7 +60,7 @@ namespace Assignment1
         private string BuildJsonString(FieldInfo field, object? obj)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            string? value = TypeChecker.isQuotableType(field) ? StringFormatter.WrapByQuotation(field.GetValue(obj)?.ToString())  : field.GetValue(obj)?.ToString();
+            string? value = _typeChecker.isQuotableType(field) ? StringFormatter.WrapByQuotation(field.GetValue(obj)?.ToString())  : field.GetValue(obj)?.ToString();
             string jsonKey = StringFormatter.WrapByQuotation(field.Name);
 
             stringBuilder.Append(jsonKey).Append(": ").Append(value).Append(", ").Append('\n');

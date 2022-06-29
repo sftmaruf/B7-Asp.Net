@@ -2,9 +2,9 @@
 
 namespace Assignment1
 {
-    public static class TypeChecker 
+    public class TypeChecker : ITypeChecker
     {
-        public static bool isDictionaryType(FieldInfo field)
+        public bool isDictionaryType(FieldInfo field)
         {
             if(isEnumerableType(field))
             {
@@ -15,7 +15,7 @@ namespace Assignment1
             return false;
         }
 
-        public static bool isDictionaryType(PropertyInfo property)
+        public bool isDictionaryType(PropertyInfo property)
         {
             if (isEnumerableType(property))
             {
@@ -26,14 +26,14 @@ namespace Assignment1
             return false;
         }
 
-        public static bool isEnumerableType(FieldInfo field)
+        public bool isEnumerableType(FieldInfo field)
         {
             return (field.FieldType.GetInterface("ICollection") != null && field.FieldType.GetInterface("IEnumerable") != null)
                 || field.FieldType.IsInterface && field.FieldType.GetInterface("IEnumerable") != null
                 || field.FieldType.IsArray;
         }
 
-        public static bool isEnumerableType(PropertyInfo property)
+        public bool isEnumerableType(PropertyInfo property)
         {
 
             return (property.PropertyType.GetInterface("ICollection") != null && property.PropertyType.GetInterface("IEnumerable") != null)
@@ -41,26 +41,26 @@ namespace Assignment1
                 || property.PropertyType.IsArray;
         }
 
-        public static bool IsJsonableType(FieldInfo field)
+        public bool IsJsonableType(FieldInfo field)
         {
             return field.FieldType.IsValueType
                 || field.FieldType.Name == "String";
         }
 
-        public static bool IsJsonableType(TypeInfo type)
+        public bool IsJsonableType(TypeInfo type)
         {
             return type.IsValueType
                 || type.Name == "String";
         }
 
-        public static bool IsJsonableType(PropertyInfo property)
+        public bool IsJsonableType(PropertyInfo property)
         {
             return property.PropertyType.IsValueType
                 || property.PropertyType.Name == "String";
         }
 
-        public static bool isQuotableType(FieldInfo field) => field.FieldType == typeof(string) || field.FieldType == typeof(DateTime);
+        public bool isQuotableType(FieldInfo field) => field.FieldType == typeof(string) || field.FieldType == typeof(DateTime);
 
-        public static bool isQuotableType(PropertyInfo property) => property.PropertyType == typeof(string) || property.PropertyType == typeof(DateTime);
+        public bool isQuotableType(PropertyInfo property) => property.PropertyType == typeof(string) || property.PropertyType == typeof(DateTime);
     }
 }
