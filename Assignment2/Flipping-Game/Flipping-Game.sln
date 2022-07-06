@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32611.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flipping-Game", "Flipping-Game.csproj", "{ABC1C110-47A8-45FD-801B-1756CCBB367C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABC1C110-47A8-45FD-801B-1756CCBB367C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC1C110-47A8-45FD-801B-1756CCBB367C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC1C110-47A8-45FD-801B-1756CCBB367C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC1C110-47A8-45FD-801B-1756CCBB367C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D9AF089-6E22-42F0-8FD6-E059768D5BB3}
+	EndGlobalSection
+EndGlobal
