@@ -31,3 +31,6 @@ int findJuicyWorm(int juicyWorm)
     }
     return 0;
 }
+
+// problem-link -> https://codeforces.com/problemset/problem/474/B
+// time-complexity -> O(n)
