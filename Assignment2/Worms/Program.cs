@@ -1,16 +1,16 @@
 ﻿int numberOfPiles = Convert.ToInt32(Console.ReadLine());
 int[] worms = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
 int numberOfJuicyWorms = Convert.ToInt32(Console.ReadLine());
-int[] labelsOfJuicyWorms = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
+int[] juicyWorms = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
 
 for (int i = 1; i < numberOfPiles; i++)
 {
     worms[i] = worms[i] + worms[i - 1];
 }
 
-foreach (var labeledWorm in labelsOfJuicyWorms)
+foreach (var juicyWorm in juicyWorms)
 {
-    int position = findJuicyWorm(labeledWorm);
+    int position = findJuicyWorm(juicyWorm);
     Console.WriteLine(position);
 }
 
