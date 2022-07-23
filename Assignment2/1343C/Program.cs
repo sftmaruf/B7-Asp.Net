@@ -39,6 +39,5 @@ while (numberOfTestCase != 0)
     numberOfTestCase--;
 }
 
-
 // problem-link -> https://codeforces.com/problemset/problem/1343/C
 // time-complexity -> O(m * n)
