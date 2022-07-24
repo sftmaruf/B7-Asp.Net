@@ -4,7 +4,6 @@ while (numberOfTestCase > 0)
 {
     int[] inputs = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
     int[] elements = Console.ReadLine()!.Split().Select(int.Parse).ToArray();
-
     int length = inputs[0];
     int neededElement = inputs[1];
 
