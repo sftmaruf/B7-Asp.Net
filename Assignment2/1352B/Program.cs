@@ -28,8 +28,8 @@ while (numberOfTestCase > 0)
     numberOfTestCase--;
 }
 
-bool isNoCase(int sumOfK, int k) => k > sumOfK || !isOdd(sumOfK) && isOdd(k) && sumOfK / 2 < k || isOdd(sumOfK) && !isOdd(k);
 bool isOdd(int value) => value % 2 != 0;
+bool isNoCase(int sumOfK, int k) => k > sumOfK || !isOdd(sumOfK) && isOdd(k) && sumOfK / 2 < k || isOdd(sumOfK) && !isOdd(k);
 void printValues(int sumOfK, int k, int initialValue)
 {
     IEnumerable<int> values = Enumerable.Repeat(initialValue, k - 1).Append(sumOfK - initialValue * (k - 1));
