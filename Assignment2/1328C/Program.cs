@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 int TestCase = Convert.ToInt32(Console.ReadLine());
-
 StringBuilder output1 = new StringBuilder();
 StringBuilder output2 = new StringBuilder();
 
@@ -54,3 +53,5 @@ while (TestCase > 0)
     TestCase--;
 }
 
+// problem-link -> https://codeforces.com/problemset/problem/1328/C
+// time-complexity -> O(n)
