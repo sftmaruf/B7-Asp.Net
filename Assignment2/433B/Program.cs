@@ -28,8 +28,6 @@ void Solve(bool isNegativeIndex, int lowerBound, int upperBound, long[] costs)
     Console.WriteLine(isNegativeIndex
         ? costs[upperBound - 1]
         : costs[upperBound - 1] - costs[lowerBound - 2]);
-    //if (isNegativeIndex) Console.WriteLine(costs[upperBound - 1]);
-    //else Console.WriteLine(costs[upperBound - 1] - costs[lowerBound - 2]);
 }
 
 // problem-link -> https://codeforces.com/problemset/problem/433/B
