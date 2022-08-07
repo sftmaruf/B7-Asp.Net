@@ -29,3 +29,6 @@ while (NumberOfTestCase-- > 0)
     }
     Console.WriteLine(erasedCount);
 }
+
+// problem-link -> https://codeforces.com/problemset/problem/1385/C
+// time-complexity -> O(n)
