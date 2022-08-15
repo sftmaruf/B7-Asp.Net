@@ -9,6 +9,5 @@ while (NumberOfTestCase-- > 0)
     else Console.WriteLine("Division 4");
 }
 
-
 // problem-link -> https://codeforces.com/problemset/problem/1669/A
 // time-complexity -> O(1)
