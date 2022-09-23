@@ -1,19 +1,20 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Infrastructure;
+using Infrastructure.DbContexts;
 using Library;
-using Library.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
-using System.Linq.Expressions;
+using System.Reflection;
 
 try
 {
     var builder = WebApplication.CreateBuilder(args);
 
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    var assemblyName = Assembly.GetExecutingAssembly().FullName;
 
     builder.Host.UseSerilog((ctx, lc) => lc
         .MinimumLevel.Debug()
@@ -25,12 +26,12 @@ try
     builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     {
         containerBuilder.RegisterModule(new LibraryModule());
-        containerBuilder.RegisterModule(new InfrastructureModule());
+        containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName));
     });
 
     // Add services to the container.
     builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(connectionString));
+        options.UseSqlServer(connectionString, m => m.MigrationsAssembly(assemblyName)));
     builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
     builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
