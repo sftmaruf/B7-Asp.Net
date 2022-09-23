@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Linq.Expressions;
-using FirstDemo.Infrastructure.Entities;
+using Infrastructure.Entities;
 using System.Data.Common;
 using Microsoft.Data.SqlClient;
 using System.Data;
