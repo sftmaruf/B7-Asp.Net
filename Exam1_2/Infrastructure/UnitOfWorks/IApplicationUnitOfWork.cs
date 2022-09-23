@@ -1,4 +1,5 @@
 ﻿using FirstDemo.Infrastructure.UnitOfWorks;
+using Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace Infrastructure.UnitOfWorks
 {
     public interface IApplicationUnitOfWork : IUnitOfWork
     {
+        IBookRepository Books { get; }
+        IReaderRepository Readers { get; }
     }
 }

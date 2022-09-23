@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Styles
+{
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/member/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <table id="books" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Author Name</th>
+                <th>Release Date</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Author Name</th>
+                <th>Release Date</th>
+            </tr>
+            </tfoot>
+            </table>
+        </div>
+        <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+
+@section Scripts
+{
+    <!-- DataTables -->
+    <script src="~/member/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/member/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+    <script>
+  $(function () {
+    $('#books').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "/member/book/GetBookData",
+        },
+    });
+  });
+</script>
+}

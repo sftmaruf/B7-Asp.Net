@@ -11,6 +11,7 @@ namespace Library.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            logger.LogWarning("We are in Home controller");
         }
 
         public IActionResult Index()

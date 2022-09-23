@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.UnitOfWorks
 {
-    public class ApplicationUnitOfWork : UnitOfWork
+    public class ApplicationUnitOfWork : UnitOfWork, IApplicationUnitOfWork
     {
         public IBookRepository Books { get; private set; }
         public IReaderRepository Readers { get; private set; }

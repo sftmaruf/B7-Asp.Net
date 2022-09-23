@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Infrastructure.DbContexts;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using Infrastructure.UnitOfWorks;
 
 namespace Infrastructure
@@ -24,12 +25,20 @@ namespace Infrastructure
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
+                .WithParameter("connectionString", _connectionString)
+                .WithParameter("assemblyName", _assemblyName)
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<BookService>().As<IBookService>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ReaderService>().As<IReaderService>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ReaderRepository>().As<IReaderRepository>()
                 .InstancePerLifetimeScope();
             
-            builder.RegisterType<BookRepository>().As<BookRepository>()
+            builder.RegisterType<BookRepository>().As<IBookRepository>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationUnitOfWork>().As<IApplicationUnitOfWork>()
