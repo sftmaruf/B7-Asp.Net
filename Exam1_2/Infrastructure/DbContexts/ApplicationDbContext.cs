@@ -1,4 +1,4 @@
-﻿using Infrastructure.DbContexts;
+﻿using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,5 +23,8 @@ namespace Infrastructure.DbContexts
             }
             base.OnConfiguring(optionsBuilder);
         }
+
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Reader> Readers { get; set; }
     }
 }
