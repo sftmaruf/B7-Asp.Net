@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using Infrastructure.DbContexts;
+using Infrastructure.Repositories;
+using Infrastructure.UnitOfWorks;
 
 namespace Infrastructure
 {
@@ -22,6 +24,15 @@ namespace Infrastructure
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ReaderRepository>().As<IReaderRepository>()
+                .InstancePerLifetimeScope();
+            
+            builder.RegisterType<BookRepository>().As<BookRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<ApplicationUnitOfWork>().As<IApplicationUnitOfWork>()
                 .InstancePerLifetimeScope();
 
             base.Load(builder);
