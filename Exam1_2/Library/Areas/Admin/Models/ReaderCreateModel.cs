@@ -4,18 +4,24 @@ using Infrastructure.Services;
 
 namespace Library.Areas.Admin.Models
 {
-    public class ReaderCreateModel
+    public class ReaderCreateModel : BaseModel
     {
         public string? Name { get; set; }
         public int Age { get; set; }
         public string? Address { get; set; }
 
-        private ILifetimeScope _scope;
         private IReaderService _readerService;
+
+        public ReaderCreateModel() : base() { }
+
+        public ReaderCreateModel(IReaderService readerService) 
+        {
+            _readerService = readerService;
+        }
 
         public void ResolveDependency(ILifetimeScope scope)
         {
-            _scope = scope;
+            base.ResolveDependency(scope);
             _readerService = _scope.Resolve<IReaderService>();
         }
 

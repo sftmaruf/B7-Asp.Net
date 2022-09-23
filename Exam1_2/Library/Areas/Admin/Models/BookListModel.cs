@@ -4,10 +4,11 @@ using Library.Models;
 
 namespace Library.Areas.Admin.Models
 {
-    public class BookListModel
+    public class BookListModel : BaseModel
     {
         private IBookService? _bookService;
-        private ILifetimeScope _scope;
+
+        public BookListModel() : base() { }
 
         public BookListModel(IBookService bookService)
         {
@@ -16,7 +17,7 @@ namespace Library.Areas.Admin.Models
 
         public void ResolveDependency(ILifetimeScope scope)
         {
-            _scope = scope;
+            base.ResolveDependency(scope);
             _bookService = _scope.Resolve<IBookService>();
         }
 

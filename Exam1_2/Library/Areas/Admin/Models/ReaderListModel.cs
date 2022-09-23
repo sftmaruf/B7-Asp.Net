@@ -4,10 +4,11 @@ using Library.Models;
 
 namespace Library.Areas.Admin.Models
 {
-    public class ReaderListModel
+    public class ReaderListModel : BaseModel
     {
         private IReaderService? _readerService;
-        private ILifetimeScope _scope;
+
+        public ReaderListModel() { }
 
         public ReaderListModel(IReaderService readerService)
         {
@@ -16,7 +17,7 @@ namespace Library.Areas.Admin.Models
 
         public void ResolveDependency(ILifetimeScope scope)
         {
-            _scope = scope;
+            base.ResolveDependency(scope);
             _readerService = _scope.Resolve<ReaderService>();
         }
 

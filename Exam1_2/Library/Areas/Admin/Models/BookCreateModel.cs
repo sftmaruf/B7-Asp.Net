@@ -4,19 +4,25 @@ using Infrastructure.Services;
 
 namespace Library.Areas.Admin.Models
 {
-    public class BookCreateModel
+    public class BookCreateModel : BaseModel
     {
         public string? Name { get; set; }
         public double Price { get; set; }
         public string? AuthorName { get; set; }
         public DateTime ReleaseDate { get; set; }
 
-        private ILifetimeScope _scope;
         private IBookService _bookService;
 
-        public void ResolveDependency(ILifetimeScope scope)
+        public BookCreateModel() : base() { }
+
+        public BookCreateModel(IBookService bookService)
         {
-            _scope = scope;
+            _bookService = bookService;
+        }
+
+        public override void ResolveDependency(ILifetimeScope scope)
+        {
+            base.ResolveDependency(scope);
             _bookService = _scope.Resolve<IBookService>();
         }
 
