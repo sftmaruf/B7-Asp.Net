@@ -1,5 +1,6 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Infrastructure;
 using Library;
 using Library.Data;
 using Microsoft.AspNetCore.Identity;
@@ -11,6 +12,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 {
     containerBuilder.RegisterModule(new LibraryModule());
+    containerBuilder.RegisterModule(new InfrastructureModule());
 });
 
 // Add services to the container.
