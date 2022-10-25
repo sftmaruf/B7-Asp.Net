@@ -30,6 +30,7 @@ namespace Assignment4.TestObject
 
     public class Brand
     {
+        public int Id { get; set; }
         public string Name;
         public string Country;
     }

@@ -17,6 +17,7 @@ namespace Assignment4.TestObject
                 Price = 102309,
                 Brand = new Brand()
                 {
+                    Id = 1,
                     Country = "Bangladesh",
                     Name = "Lamborghini"
                 },
@@ -27,15 +28,17 @@ namespace Assignment4.TestObject
                         Id = 1,
                         Brand = new Brand()
                         {
+                            Id = 1,
                             Country = "Inidia",
                             Name = "DoorBrand1"
                         }
                     },
                     new Door()
                     {  
-                        Id = 2,
+                        Id = 1,
                         Brand = new Brand()
                         {
+                            Id = 1,
                             Country = "Italy",
                             Name = "DoorBrand2"
                         }
@@ -47,7 +50,7 @@ namespace Assignment4.TestObject
                     {
                         Id = 1,
                         Brand = new Brand()
-                        {
+                        {Id = 1,
                             Country = "Bangladesh",
                             Name = "WheelBrand1"
                         }
@@ -55,9 +58,10 @@ namespace Assignment4.TestObject
                     new Wheel()
                     {
 
-                        Id = 2,
+                        Id = 1,
                         Brand = new Brand()
                         {
+                            Id = 1,
                             Country = "Bangladesh",
                             Name = "WheelBrand2"
                         }
@@ -80,12 +84,14 @@ namespace Assignment4.TestObject
                     Email = "jalal@gmail.com",
                     PresentAddress = new Address()
                     {
+                        Id = 1,
                         Street = "Mirpur 10",
                         City = "Dhaka",
                         Country = "Bangladesh"
                     },
                     PermanentAddress = new Address()
                     {
+                        Id = 1,
                         Street = "Unknown",
                         City = "Unknown",
                         Country = "Bangladesh"
@@ -94,7 +100,15 @@ namespace Assignment4.TestObject
                     {
                         new Phone()
                         {
+                            Id = 1,
                             Number = "01711111111",
+                            Extension = "",
+                            CountryCode = "880"
+                        },
+                        new Phone()
+                        {
+                            Id = 2,
+                            Number = "01711111116",
                             Extension = "",
                             CountryCode = "880"
                         }
@@ -111,6 +125,7 @@ namespace Assignment4.TestObject
                         {
                             new Session()
                             {
+                                Id = 1,
                                 DurationInHour = 2,
                                 LearningObjective = "New Session"
                             }
@@ -121,6 +136,7 @@ namespace Assignment4.TestObject
                 {
                     new AdmissionTest()
                     {
+                        Id = 1,
                         EndDateTime = DateTime.Now,
                         StartDateTime = DateTime.Now,
                         TestFees = 200

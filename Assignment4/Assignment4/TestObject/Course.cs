@@ -21,6 +21,7 @@ namespace Assignment4.TestObject
     }
     public class AdmissionTest
     {
+        public int Id { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public double TestFees { get; set; }
@@ -35,6 +36,7 @@ namespace Assignment4.TestObject
     }
     public class Session
     {
+        public int Id { get; set; }
         public int DurationInHour { get; set; }
         public string LearningObjective { get; set; }
     }
@@ -49,12 +51,14 @@ namespace Assignment4.TestObject
     }
     public class Address
     {
+        public int Id { get; set; }
         public string Street { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
     }
     public class Phone
     {
+        public int Id { get; set; }
         public string Number { get; set; }
         public string Extension { get; set; }
         public string CountryCode { get; set; }
