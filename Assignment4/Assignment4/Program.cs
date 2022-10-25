@@ -8,6 +8,7 @@ using System.Text.Json;
 
 // To create database automatically this code block needed.
 // The user must have the permission to create a database to create database automatically with the code.
+// To create the database manually: "Create DATABASE Assignment4";"
 string connectionString = "Server=.\\SQLEXPRESS;Database=Assignment4;User Id=aspnetb7;Password=123456;";
 IDBManager dbManager = new DBManager(connectionString, new SQLGenerator(connectionString));
 await dbManager.CreateDatabaseIfNotExist();
@@ -24,8 +25,8 @@ var parser = new Parser(typeResolver,
         typeResolver));
 
 var orm = new MyORM<int, Course>(dbManager, parser);
-await orm.Insert(TestObject.GetCourse());
-//await orm.Update(TestObject.GetCourse());
+//await orm.Insert(TestObject.GetCourse());
+await orm.Update(TestObject.GetCourse());
 //var result = await orm.GetById(3);
 //showOutput(result);
 //await orm.Delete(TestObject.GetCar());
