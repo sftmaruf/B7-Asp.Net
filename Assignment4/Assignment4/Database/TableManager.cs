@@ -220,7 +220,7 @@ namespace Assignment4.Database
 
         public object GetPrimaryKeyValue(object obj)
         {
-            var type = obj.GetType();
+            Type type = obj.GetType();
             foreach (var field in type.GetFields())
             {
                 if (field.Name == GetPrimaryKeyName)

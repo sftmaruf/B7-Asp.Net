@@ -5,7 +5,6 @@ namespace Assignment4.Database
     public interface ITableManager
     {
         string GetPrimaryKeyName { get; }
-
         Task CreateTable(Type type, string tableName);
         Task CreateTableWithForeignKey(Type type, Type foreignTable, string tableName, string foreignTableName);
         Task DeleteData(string tableName, string columnName, object value);
