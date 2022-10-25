@@ -318,10 +318,10 @@ namespace Assignment4.Orm
                 bool isTableExist = await _tableManager.IsTableExist(tableName);
                 if (!isTableExist) throw new TableNotFoundException();
 
-                var primaryKeyValue = _tableManager.GetPrimaryKeyValue(obj);
+                var primaryKeyValue = _tableManager.GetPrimaryKeyValue(member.GetValue(obj));
 
                 await _tableManager.UpdateDataInForeignTable(tableName,
-                    member.GetValue(obj), (Name: primaryKeyName, Value: primaryKeyValue));
+                    member.GetValue(obj), (Name: _tableManager.GetPrimaryKeyName, Value: primaryKeyValue));
 
                 var keyName = tableName + _tableManager.GetPrimaryKeyName;
                 await ParseAndUpdateAgain(member.GetValue(obj), keyName);
@@ -338,16 +338,16 @@ namespace Assignment4.Orm
             bool isTableExist = await _tableManager.IsTableExist(tableName);
             if (!isTableExist) throw new TableNotFoundException();
 
-            var primaryKeyValue = _tableManager.GetPrimaryKeyValue(obj);
-
             var items = member.GetValue(obj) as IEnumerable;
             var keyName = tableName + _tableManager.GetPrimaryKeyName;
             foreach (var item in items)
             {
+                var primaryKeyValue = _tableManager.GetPrimaryKeyValue(item);
+
                 try
                 {
                     await _tableManager.UpdateDataInForeignTable(tableName,
-                        item, (Name: primaryKeyName, Value: primaryKeyValue));
+                        item, (Name: _tableManager.GetPrimaryKeyName, Value: primaryKeyValue));
 
                     await ParseAndUpdateAgain(item, keyName);
                 }
