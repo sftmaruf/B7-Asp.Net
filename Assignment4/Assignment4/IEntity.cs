@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Assignment4
 {
-    public interface IEntity
+    public interface IEntity<G>
     {
-        Guid Id { get; }
+        G Id { get; set; }
     }
 }
