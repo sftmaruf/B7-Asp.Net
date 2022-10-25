@@ -25,17 +25,17 @@ var parser = new Parser(typeResolver,
         typeResolver));
 
 var orm = new MyORM<int, Course>(dbManager, parser);
-//await orm.Insert(TestObject.GetCourse());
+await orm.Insert(TestObject.GetCourse());
 await orm.Update(TestObject.GetCourse());
-//var result = await orm.GetById(3);
-//showOutput(result);
-//await orm.Delete(TestObject.GetCar());
-//await orm.Delete(1);
+var result = await orm.GetById(3);
+showOutput(result);
 var results = await orm.GetAll();
-foreach (var result in results)
+foreach (var data in results)
 {
-    showOutput(result);
+    showOutput(data);
 }
+await orm.Delete(1);
+await orm.Delete(TestObject.GetCourse());
 
 void showOutput(object obj)
 {
