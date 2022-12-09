@@ -1,9 +1,5 @@
 ﻿using Autofac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using StockData.Worker.Models;
 
 namespace StockData.Worker
 {
@@ -11,6 +7,10 @@ namespace StockData.Worker
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<StockDataModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }
