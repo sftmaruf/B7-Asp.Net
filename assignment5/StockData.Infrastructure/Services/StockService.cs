@@ -30,7 +30,7 @@ namespace StockData.Infrastructure.Services
                     foreach (var property in stockPrice.GetType().GetProperties())
                     {
                         if (property.Name != "Id" && property.Name != "CompanyId"
-                            && property.Name != "Company")
+                            && property.Name != "Company" && property.Name != "TimeStamp")
                         {
                             property.SetValue(stockPrice,
                                 Convert.ChangeType(row[col], property.PropertyType));
@@ -38,6 +38,7 @@ namespace StockData.Infrastructure.Services
                             col++;
                         }
                     }
+                    stockPrice.TimeStamp = DateTime.Now;
                     stockPrices.Add(stockPrice);
                 }
 

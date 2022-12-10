@@ -14,6 +14,7 @@ namespace StockData.Infrastructure.Entities
         public string Trade { get; set; }
         public string Value { get; set; }
         public string Volume { get; set; }
+        public DateTime TimeStamp { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; }
     }
