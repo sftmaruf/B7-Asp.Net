@@ -33,7 +33,7 @@ namespace StockData.Worker.Models
 
             var tradingDatas = new List<List<object>>();
 
-            if (marketStatus == statusClose)
+            if (marketStatus != statusClose)
             {
                 var nodes = doc.DocumentNode.SelectSingleNode("//div[@id='RightBody']")
                     .ChildNodes[5]
