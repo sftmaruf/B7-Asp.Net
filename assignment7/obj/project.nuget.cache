@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "88Fwgrx06S6voOtRQMdCBoiWsROvr3s/uf2XQ9mTRZzgcD68ws5TuXovkthSZRSQr4kSrY5WOrFNNUkN4Y3gMg==",
+  "success": true,
+  "projectFilePath": "D:\\documents\\Courses\\ASP .NET\\B7-Asp.Net\\assignment7\\assignment7.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Shafayet Maruf\\.nuget\\packages\\awssdk.core\\3.7.103.24\\awssdk.core.3.7.103.24.nupkg.sha512",
+    "C:\\Users\\Shafayet Maruf\\.nuget\\packages\\awssdk.dynamodbv2\\3.7.101.29\\awssdk.dynamodbv2.3.7.101.29.nupkg.sha512",
+    "C:\\Users\\Shafayet Maruf\\.nuget\\packages\\awssdk.s3\\3.7.101.58\\awssdk.s3.3.7.101.58.nupkg.sha512",
+    "C:\\Users\\Shafayet Maruf\\.nuget\\packages\\awssdk.sqs\\3.7.100.62\\awssdk.sqs.3.7.100.62.nupkg.sha512"
+  ],
+  "logs": []
+}
