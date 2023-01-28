@@ -3,12 +3,12 @@ using assignment7.Entities;
 using System.Text.Json;
 
 var keyName = "Upload.txt";
+var filePath = @"D:\\documents\Courses\ASP .NET\B7-Asp.Net\assignment7\Files\Upload.txt";
 
-var uploadService = new S3Service();
-uploadService.UploadAsync().Wait();
-uploadService.DeleteAsync(keyName).Wait();
-uploadService.DownloadAsync(@"D:\\documents\Courses\ASP .NET\B7-Asp.Net\assignment7\Files\Upload.txt",
-    keyName).Wait();
+var s3Service = new S3Service();
+//await s3Service.UploadAsync(filePath);
+//await s3Service.DownloadAsync(filePath, keyName);
+//await s3Service.DeleteAsync(keyName);
 
 //var dynamoService = new DynamoDbService<Person>();
 //await dynamoService.AddAsync(Person.DemoData());

@@ -8,19 +8,14 @@ namespace assignment7
     public class S3Service : AwsService
     {
         private IAmazonS3 s3Client;
-        private readonly string filePath;
-
         private readonly string bucketName;
 
-        public S3Service() : this(
-            @"D:\\documents\Courses\ASP .NET\B7-Asp.Net\assignment7\Files\Upload.txt", 
-            "aspnetb7-shafayet-assignment7")
+        public S3Service() : this( "aspnetb7-shafayet-assignment7")
         {
         }
 
-        public S3Service(string path, string bucket)
+        public S3Service(string bucket)
         {
-            filePath = path;
             bucketName = bucket;
 
             s3Client = new AmazonS3Client(_accessKey, _secretKey, _region);
@@ -29,10 +24,11 @@ namespace assignment7
         private string FileDoesntExistMessage(string fileName) =>
             $"'{fileName}' file doesn't exist. Please provide a valid name.";
 
-        public async Task UploadAsync()
+        public async Task UploadAsync(string filePath)
         {
             var fileTransferUtility = new TransferUtility(s3Client);
             await fileTransferUtility.UploadAsync(filePath, bucketName);
+            Console.WriteLine("file uploaded successfully");
         }
 
         public async Task DownloadAsync(string destinationFullPath, string fileName)
@@ -48,7 +44,7 @@ namespace assignment7
                 var fileTransferUtility = new TransferUtility(s3Client);
                 await fileTransferUtility.DownloadAsync(destinationFullPath, bucketName, fileName);
                 
-                Console.WriteLine($"{fileName} is downloaded in {destinationFullPath} path");
+                Console.WriteLine($"'{fileName}' is downloaded in {destinationFullPath} path");
             }
             catch (AmazonS3Exception ex)
             {
